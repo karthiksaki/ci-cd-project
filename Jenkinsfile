@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the repository using credentials
-                git url: 'https://github.com/karthiksaki/ci-cd-project.git', credentialsId: '1cd527b0-6b3d-4351-b5b0-be007b002162'
+                git url: 'https://github.com/karthiksaki/ci-cd-project.git',  branch: 'main', credentialsId: '1cd527b0-6b3d-4351-b5b0-be007b002162'
             }
         }
 
