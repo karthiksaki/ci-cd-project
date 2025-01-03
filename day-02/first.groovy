@@ -14,8 +14,8 @@ pipeline {
         stage('Install Ansible') {
             steps {
                 // Install Ansible
-                sh 'sudo apt-get update'
-                sh 'sudo apt-get install -y ansible'
+                sh 'sudo yum update'
+                sh 'sudo yum install -y ansible'
             }
         }
         stage('Setup Tomcat Server') {
