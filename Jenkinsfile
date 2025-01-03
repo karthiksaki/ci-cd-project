@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Run the Groovy script
                 script {
-                    def groovyScript = readFile 'day-02/abc.groovy'
+                    def groovyScript = readFile 'day-02/first.groovy'
                     evaluate(groovyScript)
                 }
             }
