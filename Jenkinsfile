@@ -24,17 +24,16 @@ pipeline {
         stage('Setup Tomcat Server') {
             steps {
                 // Run Ansible playbook to install and configure Tomcat server
-                ansiblePlaybook playbook: 'ansible/tomcat-setup.yml'
+                ansiblePlaybook playbook: 'ansible/tomcat-setup.yml', inventory: 'ansible/hosts'
             }
         }
 
         stage('Install Web Server') {
             steps {
                 // Run Ansible playbook to install web server with HTTP and HTTPS
-                ansiblePlaybook playbook: 'ansible/webserver-setup.yml'
+                ansiblePlaybook playbook: 'ansible/webserver-setup.yml', inventory: 'ansible/hosts'
             }
         }
-
         stage('Run Groovy Script') {
             steps {
                 // Run the Groovy script
