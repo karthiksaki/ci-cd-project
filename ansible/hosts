@@ -1,5 +1,5 @@
 [servers]
-172.31.26.244
+localhost ansible_connection=local
 
 [tomcat:children]
 servers
