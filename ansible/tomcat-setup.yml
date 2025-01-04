@@ -1,6 +1,6 @@
 ---
 - name: setup Tomcat Server
-  hosts: all
+  hosts: tomcat
   become: yes
   roles:
     - tomcat
