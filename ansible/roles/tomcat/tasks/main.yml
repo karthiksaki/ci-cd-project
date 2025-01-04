@@ -1,6 +1,6 @@
 ---
 - name: Install Tomcat
-  apt:
+  yum:
     name: tomcat9
     state: present
 - name: Starting the Tomcat Server
