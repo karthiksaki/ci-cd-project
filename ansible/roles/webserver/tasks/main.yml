@@ -19,3 +19,8 @@
   service:
     name: httpd
     state: restarted
+  register: apache_restart
+
+- name: Display Apache Restart Status
+  debug:
+    msg: "Apache server restart status: {{ apache_restart }}"
