@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the repository using credentials
-                git url: 'https://github.com/karthiksaki/ci-cd-project.git',  branch: 'main', credentialsId: '1cd527b0-6b3d-4351-b5b0-be007b002162'
+                git url: 'https://github.com/karthiksaki/ci-cd-project.git', branch: 'main', credentialsId: 'your-credentials-id'
             }
         }
         stage('Install Ansible') {
@@ -21,27 +21,29 @@ pipeline {
                 sh 'sudo yum install -y ansible'
             }
         }
-        stage('Setup Tomcat Server') {
+        stage('Confirm Parallel Execution') {
             steps {
-                // Run Ansible playbook to install and configure Tomcat server
-                ansiblePlaybook playbook: 'ansible/tomcat-setup.yml', inventory: 'ansible/hosts'
+                script {
+                    input message: 'Are we good to proceed with parallel execution of Setup Tomcat Server and Install Web Server stages?'
+                }
             }
         }
-        stage('Install Web Server') {
-            steps {
-                // Run Ansible playbook to install web server with HTTP and HTTPS
-                ansiblePlaybook playbook: 'ansible/webserver-setup.yml', inventory: 'ansible/hosts'
+        stage('Parallel Execution') {
+            parallel {
+                stage('Setup Tomcat Server') {
+                    steps {
+                        // Run Ansible playbook to install and configure Tomcat server
+                        ansiblePlaybook playbook: 'ansible/tomcat-setup.yml', inventory: 'ansible/hosts'
+                    }
+                }
+                stage('Install Web Server') {
+                    steps {
+                        // Run Ansible playbook to install web server with HTTP and HTTPS
+                        ansiblePlaybook playbook: 'ansible/webserver-setup.yml', inventory: 'ansible/hosts'
+                    }
+                }
             }
         }
-        // stage('Run Groovy Script') {
-        //     steps {
-        //         // Run the Groovy script
-        //         script {
-        //             def groovyScript = readFile 'day-02/first.groovy'
-        //             evaluate(groovyScript)
-        //         }
-        //     }
-        // }
     }
     post {
         always {
