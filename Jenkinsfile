@@ -1,15 +1,12 @@
 pipeline {
     agent any
-
     options {
         // Keep the last 5 logs
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -17,7 +14,6 @@ pipeline {
                 git url: 'https://github.com/karthiksaki/ci-cd-project.git',  branch: 'main', credentialsId: '1cd527b0-6b3d-4351-b5b0-be007b002162'
             }
         }
-
         stage('Install Ansible') {
             steps {
                 // Install Ansible
@@ -25,31 +21,28 @@ pipeline {
                 sh 'sudo yum install -y ansible'
             }
         }
-
         stage('Setup Tomcat Server') {
             steps {
                 // Run Ansible playbook to install and configure Tomcat server
                 ansiblePlaybook playbook: 'ansible/tomcat-setup.yml', inventory: 'ansible/hosts'
             }
         }
-
         stage('Install Web Server') {
             steps {
                 // Run Ansible playbook to install web server with HTTP and HTTPS
                 ansiblePlaybook playbook: 'ansible/webserver-setup.yml', inventory: 'ansible/hosts'
             }
         }
-        stage('Run Groovy Script') {
-            steps {
-                // Run the Groovy script
-                script {
-                    def groovyScript = readFile 'day-02/first.groovy'
-                    evaluate(groovyScript)
-                }
-            }
-        }
+        // stage('Run Groovy Script') {
+        //     steps {
+        //         // Run the Groovy script
+        //         script {
+        //             def groovyScript = readFile 'day-02/first.groovy'
+        //             evaluate(groovyScript)
+        //         }
+        //     }
+        // }
     }
-
     post {
         always {
             // Archive the artifacts
