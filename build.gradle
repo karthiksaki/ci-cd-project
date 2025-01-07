@@ -10,3 +10,4 @@ dependencies {
     testImplementation 'org.jenkins-ci.plugins:jenkins-pipeline-unit:1.10'
     testImplementation 'junit:junit:4.13.2'
 }
+
