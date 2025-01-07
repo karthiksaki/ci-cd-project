@@ -1,9 +1,10 @@
 pipeline {
     agent any
-    // options {
+        options {
     //     // Keep the last 5 logs
     //     buildDiscarder(logRotator(numToKeepStr: '5'))
-    // }
+            ansicolor('xterm')
+    }
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
