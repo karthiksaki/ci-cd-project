@@ -21,23 +21,6 @@ pipeline {
                 sh 'sudo yum install -y ansible'
             }
         }
-        // stage('Confirm Parallel Execution') {
-        //     steps {
-        //         script {
-        //             input message: 'Are we good to proceed with parallel execution of Setup Tomcat Server and Install Web Server stages?'
-        //         }
-        //     }
-        // }
-
-
-        // stage('Confirm Parallel Execution') {
-        //     steps {
-        //         script {
-        //             input message: 'Are we good to proceed with parallel execution of Setup Tomcat Server and Install Web Server stages?'
-        //         }
-        //     }
-        // }
-        
         stage('Parallel Execution') {
             parallel {
                 stage('Setup Tomcat Server') {
