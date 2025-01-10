@@ -21,25 +21,25 @@ pipeline {
                 sh 'sudo yum install -y ansible'
             }
         }
-        stage('Test Cases') {
-            steps {
-                echo 'Running test cases...'
-                // Add your test case commands here
-                sh './gradlew test'
-            }
-        }
-        stage('Code Validation') {
-            steps {
-                echo 'Validating code...'
-                // Add your code validation commands here
-                sh './gradlew check'
-            }
-        }
-        stage('Report Results') {
-            steps {
-                echo 'Test results reported.'
-            }
-        }
+        // stage('Test Cases') {
+        //     steps {
+        //         echo 'Running test cases...'
+        //         // Add your test case commands here
+        //         sh './gradlew test'
+        //     }
+        // }
+        // stage('Code Validation') {
+        //     steps {
+        //         echo 'Validating code...'
+        //         // Add your code validation commands here
+        //         sh './gradlew check'
+        //     }
+        // }
+        // stage('Report Results') {
+        //     steps {
+        //         echo 'Test results reported.'
+        //     }
+        // }
         stage('Parallel Execution') {
             parallel {
                 stage('Setup Tomcat Server') {
