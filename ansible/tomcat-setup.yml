@@ -34,18 +34,18 @@
         - prabhas
         - pawan
  
-- name: Playbook | to create | file
-  hosts: tomcat
-  become: yes
-  tasks:
-    - name: creating a directory
-      file:
-        path: /tmp/ansible
-        state: directory
-        mode: '0755'
+# - name: Playbook | to create | file
+#   hosts: tomcat
+#   become: yes
+#   tasks:
+#     - name: creating a directory
+#       file:
+#         path: /tmp/ansible
+#         state: directory
+#         mode: '0755'
 
-    - name: creating a file inside the directory
-      file:
-        path: /tmp/ansible/example.txt
-        state: touch
+#     - name: creating a file inside the directory
+#       file:
+#         path: /tmp/ansible/example.txt
+#         state: touch
 
