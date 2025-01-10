@@ -14,22 +14,26 @@
   roles:
     - tomcat
 
-
 - name: creating users on the servers 
-  user:
-    name: '{{item}}'
-    state: absent
-    with_items:
-      - snk
-      - karthik
-      - naveena
-      - ramcharan
-      - chiru
-      - nagarjuna
-      - venkatesh
-      - mahesh
-      - prabhas
-      - pawan
+  hosts: tomcat
+  become: yes
+  tasks: 
+    - name: creating users
+      user:
+        name: '{{item}}'
+        state: present
+      with_items:
+        - snk
+        - karthik
+        - naveena
+        - ramcharan
+        - chiru
+        - nagarjuna
+        - venkatesh
+        - mahesh
+        - prabhas
+        - pawan
+ 
 - name: Playbook | to create | file
   hosts: tomcat
   become: yes
