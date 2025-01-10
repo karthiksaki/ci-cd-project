@@ -20,9 +20,9 @@
   tasks: 
     - name: creating users
       user:
-        name: '{{item}}'
-        state: present
-      with_items:
+        name: '{{ item }}'
+        state: absent
+      loop:
         - snk
         - karthik
         - naveena
@@ -34,24 +34,18 @@
         - prabhas
         - pawan
  
-- name: Playbook | to create | file
-  hosts: tomcat
-  become: yes
-  tasks:
-    - name: creating a directory
-      file:
-      path: /tmp/ansible
-      state: directory
-      mode: 0755
+# - name: Playbook | to create | file
+#   hosts: tomcat
+#   become: yes
+#   tasks:
+#     - name: creating a directory
+#       file:
+#         path: /tmp/ansible
+#         state: directory
+#         mode: '0755'
 
-    - name: creating a file inside the directory
-      file:
-        path: "{{item}}"
-        state: touch
-      with_items:
-        - /tmp/ansible/file1
-        - /tmp/ansible/file2
-        - /tmp/ansible/file3
-        - /tmp/ansible/file4
-        - /tmp/ansible/file5
+#     - name: creating a file inside the directory
+#       file:
+#         path: /tmp/ansible/example.txt
+#         state: touch
 
