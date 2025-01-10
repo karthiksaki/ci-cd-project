@@ -1,10 +1,9 @@
 pipeline {
     agent any
-        options {
-    //     // Keep the last 5 logs
-    //     buildDiscarder(logRotator(numToKeepStr: '5'))
-            ansiColor('xterm')
-    }
+//         options {
+//     //     // Keep the last 5 logs
+//     //     buildDiscarder(logRotator(numToKeepStr: '5'))
+// <
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
@@ -20,6 +19,25 @@ pipeline {
                 // Install Ansible
                 sh 'sudo yum update -y'
                 sh 'sudo yum install -y ansible'
+            }
+        }
+        stage('Test Cases') {
+            steps {
+                echo 'Running test cases...'
+                // Add your test case commands here
+                sh './gradlew test'
+            }
+        }
+        stage('Code Validation') {
+            steps {
+                echo 'Validating code...'
+                // Add your code validation commands here
+                sh './gradlew check'
+            }
+        }
+        stage('Report Results') {
+            steps {
+                echo 'Test results reported.'
             }
         }
         stage('Parallel Execution') {
