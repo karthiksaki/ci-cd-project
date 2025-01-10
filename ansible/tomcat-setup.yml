@@ -1,12 +1,12 @@
 ---
-- name: Playbook | Updating packages with -y
-  hosts: tomcat
-  become: yes
-  tasks:
-    - name: update packages
-      yum:
-        name: '*'
-        state: latest
+# - name: Playbook | Updating packages with -y
+#   hosts: tomcat
+#   become: yes
+#   tasks:
+#     - name: update packages
+#       yum:
+#         name: '*'
+#         state: latest
 
 - name: setup Tomcat Server
   hosts: tomcat
